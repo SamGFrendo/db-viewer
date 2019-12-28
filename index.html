@@ -9,14 +9,10 @@
     <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
     <title>DB Viewer</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
-    <!-- I want to use JQuery to manage components -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- This is just an example of an animated bounce -->
     <script>
         $(document).ready(function() {
         console.log( "ready!" );
-        //I can use JQuery to target an html Element and add a css class
-        $("#add-table").addClass("animated bounce");
     });
     </script>
 </head>
@@ -27,31 +23,14 @@
     </header>
     <!-- Would be nice to put another column between them just to break them up a bit -->
     <div class=container>
+
         <div class=column-container>
-
             <div id=target-column>
-                
-                <!-- This is where I append the js created element
-                I should just keep using this and then rename it
-                It's fine in column one but might not work in column 2 -->
                 <div id=target> </div>
-
-                <p>I want to make a table appear in each column depending on parameters</p>
-            </div> <!-- end target-column -->
-            
-
+            </div>
             <div id=linked-column>
-                <!-- This will need to be changed -->
-                <div id=linked> </div>
-                <div id=linked-test> </div>
-                <div id=inside-2> 
-                    <h2 id=title-2>Linked tables</h2>
-                    <h3 id=desc-2>Description of linked tables </h3>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem, quaerat alias a omnis possimus laudantium, necessitatibus dolor asperiores ipsum molestiae vero magnam. Est magnam enim eaque dignissimos sequi quae ratione?</p>
-                </div>        
-
-            </div> <!-- end linked-column -->
-
+                <!-- I create divs inside this using js -->
+            </div> 
         </div> <!-- end column-container -->
 
             <!-- This div is where the boxes appear when I add table -->
@@ -61,23 +40,12 @@
             <button onclick='switchToUser()' >switch to user</button> 
             <button onclick='switchToGrants()' >switch to grants</button> 
             <button onclick='switchToPublications()' >switch to publications</button> 
-    <div>
+    <div> <!-- end container -->
 
-    </div>
-
-
-    </div>
-
-    <br>
-
-
-
-
-<!-- First I load the table-objects files that initialises all objects -->
+<!-- Load the table-objects file to initialise all objects -->
 <script src="table-objects.js"></script>
-<!-- Then I load the scripts that do stuff -->
+<!-- Load scripts -->
 <script src="script.js"></script>
-
 
 </body>
 </html>

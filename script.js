@@ -4,109 +4,63 @@ https://developer.mozilla.org/en-US/docs/Web/API/Node/appendChild
 */
 'use strict';
 
-//I should set the local storage to grantsTable if there is nothing there, otherwise move on
+//This shows me that JQuery is working on this page
+$("#add-table").addClass("animated bounce");
+
+//Do initial set of local storage (arbitrary)
 if (localStorage.getItem('storeTableKey') === null) {
   var storeTable = 'grantsTable';
   localStorage.setItem('storeTableKey', storeTable);
 }
 
-//Just a demo of putting a different table in the linked tables 
+//Just a demo of putting a different table in the linked tables - won't be used in final
 if (localStorage.getItem('storeTableKeyLinked') === null) {
   var storeTable = 'userTable';
   localStorage.setItem('storeTableKeyLinked', storeTable);
 }
 
-//eval evaluates the string - eval shouldn't be used apparently! 
+//eval evaluates the string (means I look up the object) - eval shouldn't be used apparently! 
 let targetTable = eval(localStorage.getItem('storeTableKey'));
 
+//In final I won't use linked table - I will use what is in the linked table array from the 
+//target table - it is going to be interesting how I change this
 let linkedTable = eval(localStorage.getItem('storeTableKeyLinked'));
 
 /**************************** TARGET TABLE *********************************/
-//I'm sure I could shorted this, make it smarter
 //This is what puts the info in target table DOM
-var node = document.createElement('h2');
-  node.innerHTML = targetTable.name;
-  document.getElementById('target').appendChild(node);
-var node = document.createElement('h3'); //Should I be using var? Try changing?
-  node.innerHTML = targetTable.description;
-  document.getElementById('target').appendChild(node);
-var node = document.createElement('p');
-  node.innerHTML = targetTable.columns;
-  document.getElementById('target').appendChild(node);
+
+$('#target').append($('<h2></h2>').text(targetTable.name));
+$('#target').append($('<h3></h3>').text(targetTable.description));
+$('#target').append($('<p></p>').text(targetTable.columns));
+
 /***************************************************************************/
 
 /***************************** LINKED TABLES *******************************/
 
-//This is what puts the info in linked table DOM - Currently it is just replicating
-//What is in the target table
-//Maybe I need to create divs and append it to the column div
-var node = document.createElement('h2');
-  node.innerHTML = linkedTable.name;
-  document.getElementById('linked').appendChild(node);
-var node = document.createElement('h3'); //Should I be using var? Try changing?
-  node.innerHTML = linkedTable.description;
-  document.getElementById('linked').appendChild(node);
-var node = document.createElement('p');
-  node.innerHTML = linkedTable.columns;
-  document.getElementById('linked').appendChild(node);
+//I should return what is the array of linked tables for the target table...
 
-//Creating a new div can be done based on the 
-//The node I create has an id - that will change, but if I keep the class the same I can format
-//it with css
-var node = document.createElement('div');
-  node.id = 'linked-table-1';
-  node.classList.add('linked-column-table');
-  document.getElementById('linked-column').appendChild(node);
+//Populating the new elements inside the dive can be done based on the content of the array
 
+//I shouldn't be looking at linked tables because it is currently demo - I should look at targetTable
+let linkedArr = targetTable.linkedTables;
 
-var node = document.createElement('h2');
-  node.innerHTML = linkedTable.name;
-  document.getElementById('linked-table-1').appendChild(node);
-var node = document.createElement('h3'); //Should I be using var? Try changing?
-  node.innerHTML = linkedTable.description;
-  document.getElementById('linked-table-1').appendChild(node);
-var node = document.createElement('p');
-  node.innerHTML = linkedTable.columns;
-  document.getElementById('linked-table-1').appendChild(node);
+for (let i = 0; i < linkedArr.length; i++) {
+
+  $('#linked-column').append($('<div></div>').attr('id', `linked-table${i}`).addClass('linked-column-table'))
+
+//Populating the new elements inside the dive can be done based on the content of the array
+//Need to select table name from the array
+
+  $(`#linked-table${i}`).append($('<h2></h2>').text(eval(linkedArr[i]).name));
+  $(`#linked-table${i}`).append($('<h3></h3>').text(eval(linkedArr[i]).description));
+  $(`#linked-table${i}`).append($('<p></p>').text(eval(linkedArr[i]).columns));
+
+}
+
 /***************************************************************************/
-
-//Next I need to make it so I use this? 
-//document.replaceChild(new, old)
 
 //The next thing I need to do is get the Linked tables to be responsive - This will be more
 //complex than the target table because I need to be able to do multiple - then make them responsive
-
-//This creates 6 divs with html in - how do I get different content in each of them
-//I think we just create divs depending on the number of linked tables
-//Then figure out how to pop the stuff in... 
-var htmlElements = "";
-for (var i = 0; i < 6; i++) {
-  // I could do something clever with template literals to target specific divs 
-   htmlElements += `<div class="box">html${i+1}</div>`;
-   console.log(typeof(htmlElements));
-}
-var container = document.getElementById('linked-test');
-container.innerHTML = htmlElements;
-
-//https://www.youtube.com/watch?v=VsXCK_2DJzA
-const elem = document.createElement('div');
-
-const elemText = document.createTextNode('This is a string');
-
-elem.appendChild(elemText);
-
-document.body.appendChild(elem)
-
-// var newDiv = document.createElement("div") // You now have an HTMLFragment
-//   newDiv.id = "Something"
-//   document.body.appendChild(newDiv)
-
-//   var node = document.createElement('h2');
-//   node.innerHTML = 'Test name';
-
-//   document.getElementById('newDiv').appendChild(node);
-
-
 
 
 

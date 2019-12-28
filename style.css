@@ -55,7 +55,8 @@ h1{
 }
 
 #linked-column{
-    background-color: red
+    background-color: red;
+    flex: 0 0 25em;
 }
 
 
